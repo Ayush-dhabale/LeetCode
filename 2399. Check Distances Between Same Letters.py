@@ -41,6 +41,27 @@ distance.length == 26
 '''
 class Solution:
     def checkDistances(self, s: str, distance: list[int]) -> bool:
+        """
+        #Brute
+        for i in range(26):
+            character = chr(i + ord('a'))
+            
+            occurences = []
+            
+            for index, letter in enumerate(s):
+                if letter == character:
+                    occurences.append(index)
+                    
+            if len(occurences) == 2:
+                dist = occurences[1] - occurences[0]
+                
+                if dist != distance[i]:
+                    return False
+                
+        return True
+        
+        """ 
+        #Better
         
         char = {}
         
@@ -53,9 +74,7 @@ class Solution:
                 
                 if dist != distance[ord(s[i]) - ord('a')]:
                     return False
-                
-        else:
-            return True
+        return True
         
 #Approach Two
 '''
