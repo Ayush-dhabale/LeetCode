@@ -29,6 +29,33 @@ n == height.length
 '''
 class Solution:
     def maxArea(self, height: list[int]) -> int:
+        '''
+        #Brute
+        max_area = 0
+        for i in range(len(height)):
+            for j in range(i+1, len(height)):
+                area = min(height[i], height[j]) * (j - i)
+                max_area = max(max_area, area)
+                
+        return max_area
+        
+        #Better
+        max_area, max_height = 0,0
+        for i in range(len(height)):
+
+            if max_height >= height[i] and i > 0:
+                continue
+
+            max_height = height
+
+            for j in range(i+1, len(height)):
+                area = min(height[i], height[j]) * (j - i)
+                max_area = max(max_area, area)
+                
+        return max_area
+    
+        '''
+        #Best/Optimal
         low , high, maxarea = 0, len(height) - 1 , 0
         
         while high > low :
