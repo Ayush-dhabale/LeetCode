@@ -31,6 +31,8 @@ Only one valid answer exists.
 '''
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
+        '''
+
         #Brute
         n = len(nums)
         for i in range(n):
@@ -39,5 +41,31 @@ class Solution:
                     return [i,j]        
                 
         #Better
+        nums_index = [(num,i) for i, num in enumerate(nums)]
+        
+        nums_index.sort()
+        
+        high, low = n- 1, 0
+        
+        while high > low:
+            if nums_index[low][0] + nums_index[high][0] > target:
+                high -= 1
+                
+            elif nums_index[low][0] + nums_index[high][0] < target:
+                low += 1
+                
+            else:
+                return [nums_index[low][1], nums_index[high][1]]
+        
+        '''
+            
+        #Optimal
+        map_ = {}
+        
+        for i, num in enumerate(nums):
+            if target - num in map_:
+                return [i, map_[target - num]]
+            
+            map_[num] = i
 
         
