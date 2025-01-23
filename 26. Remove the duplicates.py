@@ -44,8 +44,38 @@ nums is sorted in non-decreasing order.
 '''
 class Solution:
     def removeDuplicates(self, nums: list[int]) -> int:
+        '''
+        #Brute
+        unique = []
+        seen = set()
+
+        for num in nums:
+            if num not in seen:
+                unique.append(num)
+                seen.add(num)
+
+        for i in range(len(unique)):
+            nums[i] = unique[i]
+
+        return len(unique)
         
+        #Better
+        nums[:] = sorted(set(nums))
+        return len(nums)
         
+        '''
+        #Optimal
+        if not nums: 
+            return 0
+        
+        k = 1
+        
+        for i in range(1,len(nums)):
+            if nums[i] != nums[k-1]:
+                nums[k] = nums[i]
+                k += 1
+                
+        return k
 
         
         
