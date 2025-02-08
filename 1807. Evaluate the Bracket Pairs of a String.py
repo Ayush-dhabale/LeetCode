@@ -48,3 +48,24 @@ There will not be any nested bracket pairs in s.
 keyi and valuei consist of lowercase English letters.
 Each keyi in knowledge is unique.
 '''
+from typing import List
+class Solution:
+    def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
+        map_ = {key : value for key,value in knowledge}
+        i = 0
+        n = len(s)
+        result = []
+        while i < n:
+            if s[i] == '(':
+                j = i + 1
+
+                while s[j] != ')':
+                    j += 1
+
+                key  = s[i+1:j]
+                result.append(map_.get(key, "?"))
+                i = j + 1
+            else:
+                result.append(s[i])
+                i += 1
+        return "".join(result)
